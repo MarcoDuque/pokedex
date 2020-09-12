@@ -54,11 +54,9 @@ export default class Pokemon extends Component {
   async componentDidMount() {
     const { pokemonIndex } = this.props.match.params;
 
-    // Urls for pokemon information
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}/`;
     const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonIndex}/`;
 
-    // Get Pokemon Information
     const pokemonRes = await Axios.get(pokemonUrl);
 
     const name = pokemonRes.data.name;
@@ -91,7 +89,6 @@ export default class Pokemon extends Component {
       }
     });
 
-    // Convert Decimeters to Feet... The + 0.0001 * 100 ) / 100 is for rounding to two decimal places :)
     const height =
       Math.round((pokemonRes.data.height * 0.328084 + 0.00001) * 100) / 100;
 
@@ -128,7 +125,6 @@ export default class Pokemon extends Component {
       })
       .join(', ');
 
-    // Get Pokemon Description .... Is from a different end point uggh
     await Axios.get(pokemonSpeciesUrl).then(res => {
       let description = '';
       res.data.flavor_text_entries.some(flavor => {
